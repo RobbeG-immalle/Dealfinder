@@ -41,6 +41,7 @@ export interface Deal {
   profitPotential: number;
   roi: number;
   confidence: number;
+  dealScore: number;
   aiAnalysis: {
     productCategory: string;
     brand: string;
@@ -49,6 +50,10 @@ export interface Deal {
     estimatedAge: string;
     keyFeatures: string[];
     reasoning: string;
+    itemCondition?: string;
+    priceJustification?: string;
+    riskFactors?: string[];
+    comparableSales?: Array<{ source: string; price: number }>;
   };
   similarSoldPrices: number[];
   status: string;
@@ -70,24 +75,31 @@ export interface DealStats {
   totalDeals: number;
   avgROI: number;
   totalProfitPotential: number;
+  activeJobs?: number;
 }
 
 export interface DealsFilter {
   marketplace?: string;
   minROI?: number;
+  minRoi?: number;
   maxPrice?: number;
   page?: number;
   limit?: number;
+  offset?: number;
+  sortBy?: string;
 }
 
 export const dealsApi = {
   getAll: async (filter?: DealsFilter): Promise<PaginatedResponse<Deal>> => {
     const params = new URLSearchParams();
     if (filter?.marketplace) params.set('marketplace', filter.marketplace);
-    if (filter?.minROI !== undefined) params.set('minROI', String(filter.minROI));
+    const minROI = filter?.minROI ?? filter?.minRoi;
+    if (minROI !== undefined) params.set('minROI', String(minROI));
     if (filter?.maxPrice !== undefined) params.set('maxPrice', String(filter.maxPrice));
     if (filter?.page) params.set('page', String(filter.page));
+    if (filter?.offset !== undefined) params.set('offset', String(filter.offset));
     if (filter?.limit) params.set('limit', String(filter.limit));
+    if (filter?.sortBy) params.set('sortBy', filter.sortBy);
     const { data } = await apiClient.get<PaginatedResponse<Deal>>(`/deals?${params.toString()}`);
     return data;
   },

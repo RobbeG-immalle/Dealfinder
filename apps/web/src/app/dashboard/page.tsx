@@ -26,13 +26,13 @@ export default function DashboardPage() {
           icon={<Tag className="h-5 w-5 text-blue-500" />}
         />
         <StatCard
-          title="Avg. Profit"
-          value={statsLoading ? null : formatCurrency(stats?.avgProfit ?? 0, 'EUR')}
+          title="Total Profit"
+          value={statsLoading ? null : formatCurrency(stats?.totalProfitPotential ?? 0, 'EUR')}
           icon={<TrendingUp className="h-5 w-5 text-green-500" />}
         />
         <StatCard
           title="Avg. ROI"
-          value={statsLoading ? null : formatROI(stats?.avgRoi ?? 0)}
+          value={statsLoading ? null : formatROI(stats?.avgROI ?? 0)}
           icon={<BarChart2 className="h-5 w-5 text-purple-500" />}
         />
         <StatCard

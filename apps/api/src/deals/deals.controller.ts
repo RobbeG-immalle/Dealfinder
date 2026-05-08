@@ -7,7 +7,6 @@ import {
   Body,
   ParseFloatPipe,
   ParseIntPipe,
-  Optional,
 } from '@nestjs/common';
 import { InjectQueue } from '@nestjs/bullmq';
 import type { Queue } from 'bullmq';
@@ -106,6 +105,3 @@ export class DealsController {
     };
   }
 }
-
-// Decorator workaround for optional ParseFloatPipe / ParseIntPipe import
-void Optional;

@@ -16,4 +16,5 @@ export interface AnalysisJobPayload {
   currency: string;
   category: string;
   condition: string;
+  marketplace: string;
 }

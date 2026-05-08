@@ -49,7 +49,7 @@ export class AnalysisProcessor extends WorkerHost {
         currency: payload.currency,
         category: payload.category,
         condition: payload.condition,
-        marketplace: 'UNKNOWN',
+        marketplace: payload.marketplace,
       };
 
       const marketValue = await this.marketValueEstimator.estimate(listingContext, imageAnalysis);

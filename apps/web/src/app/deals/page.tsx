@@ -32,7 +32,7 @@ export default function DealsPage() {
   });
 
   const deals = data?.data ?? [];
-  const total = data?.total ?? 0;
+  const total = data?.meta.total ?? 0;
   const totalPages = Math.ceil(total / PAGE_SIZE);
 
   return (

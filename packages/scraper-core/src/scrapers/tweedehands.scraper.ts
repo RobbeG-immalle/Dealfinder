@@ -4,7 +4,6 @@ import { Marketplace } from '@dealfinder/shared';
 import type { SearchParams, ScrapedListing } from '@dealfinder/shared';
 import { BaseScraper } from '../base/base-scraper';
 import { randomDelay } from '../utils/delay';
-import { v4 as uuidv4 } from 'uuid';
 
 export class TweedehandsScraper extends BaseScraper {
   readonly marketplace = Marketplace.TWEEDEHANDS;
@@ -160,6 +159,3 @@ export class TweedehandsScraper extends BaseScraper {
     ) as Promise<ScrapedListing>;
   }
 }
-
-// suppress unused import
-void uuidv4;

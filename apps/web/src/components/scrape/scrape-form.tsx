@@ -44,11 +44,9 @@ export function ScrapeForm({ onSuccess, compact = false }: ScrapeFormProps) {
   const onSubmit = (data: ScrapeFormValues) => {
     startScrape(
       {
-        marketplace: data.marketplace as 'TWEEDEHANDS' | 'EBAY' | 'VINTED' | 'FACEBOOK',
+        marketplace: data.marketplace,
         query: data.query,
         category: data.category,
-        maxPrice: data.maxPrice ? Number(data.maxPrice) : undefined,
-        minPrice: data.minPrice ? Number(data.minPrice) : undefined,
       },
       {
         onSuccess: () => {

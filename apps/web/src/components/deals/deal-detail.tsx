@@ -103,42 +103,42 @@ export function DealDetail({ deal }: DealDetailProps) {
       </Card>
 
       {/* AI Analysis */}
-      {deal.analysis && (
+      {deal.aiAnalysis && (
         <Card>
           <CardHeader>
             <CardTitle className="text-base">AI Analysis</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            {deal.analysis.itemCondition && (
+            {deal.aiAnalysis.itemCondition && (
               <div>
                 <p className="text-sm font-medium text-gray-700">Condition</p>
-                <p className="text-sm text-gray-600">{deal.analysis.itemCondition}</p>
+                <p className="text-sm text-gray-600">{deal.aiAnalysis.itemCondition}</p>
               </div>
             )}
-            {deal.analysis.priceJustification && (
+            {deal.aiAnalysis.priceJustification && (
               <div>
                 <Separator />
                 <p className="text-sm font-medium text-gray-700 mt-4">Price Justification</p>
-                <p className="text-sm text-gray-600">{deal.analysis.priceJustification}</p>
+                <p className="text-sm text-gray-600">{deal.aiAnalysis.priceJustification}</p>
               </div>
             )}
-            {deal.analysis.riskFactors && deal.analysis.riskFactors.length > 0 && (
+            {deal.aiAnalysis.riskFactors && deal.aiAnalysis.riskFactors.length > 0 && (
               <div>
                 <Separator />
                 <p className="text-sm font-medium text-gray-700 mt-4">Risk Factors</p>
                 <ul className="list-disc list-inside space-y-1">
-                  {deal.analysis.riskFactors.map((risk, i) => (
+                  {deal.aiAnalysis.riskFactors.map((risk, i) => (
                     <li key={i} className="text-sm text-red-600">{risk}</li>
                   ))}
                 </ul>
               </div>
             )}
-            {deal.analysis.comparableSales && deal.analysis.comparableSales.length > 0 && (
+            {deal.aiAnalysis.comparableSales && deal.aiAnalysis.comparableSales.length > 0 && (
               <div>
                 <Separator />
                 <p className="text-sm font-medium text-gray-700 mt-4">Comparable Sales</p>
                 <div className="space-y-2">
-                  {deal.analysis.comparableSales.map((sale, i) => (
+                  {deal.aiAnalysis.comparableSales.map((sale, i) => (
                     <div key={i} className="flex justify-between text-sm">
                       <span className="text-gray-600">{sale.source}</span>
                       <span className="font-medium">{formatCurrency(sale.price, listing.currency)}</span>
