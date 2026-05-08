@@ -1,0 +1,83 @@
+// This is your Prisma schema file
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Listing {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @db.Text
+  images      String[]
+  askingPrice Float
+  currency    String   @default("EUR")
+  seller      String
+  location    String
+  postedAt    DateTime
+  url         String   @unique
+  marketplace String
+  category    String
+  condition   String
+  rawData     Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deal        Deal?
+
+  @@index([marketplace])
+  @@index([category])
+  @@index([askingPrice])
+}
+
+model Deal {
+  id                  String   @id @default(cuid())
+  listingId           String   @unique
+  listing             Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  estimatedMarketValue Float
+  profitPotential     Float
+  roi                 Float
+  confidence          Float
+  aiAnalysis          Json
+  similarSoldPrices   Float[]
+  status              String   @default("NEW")
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@index([roi])
+  @@index([status])
+  @@index([confidence])
+}
+
+model ScrapeJob {
+  id          String    @id @default(cuid())
+  status      String    @default("PENDING")
+  marketplace String
+  query       String
+  category    String?
+  createdAt   DateTime  @default(now())
+  completedAt DateTime?
+  error       String?
+
+  @@index([status])
+  @@index([marketplace])
+}
+
+model MarketData {
+  id          String   @id @default(cuid())
+  productName String
+  platform    String
+  soldPrice   Float
+  currency    String   @default("EUR")
+  soldAt      DateTime
+  source      String
+  createdAt   DateTime @default(now())
+
+  @@index([productName])
+  @@index([platform])
+  @@index([soldAt])
+}
