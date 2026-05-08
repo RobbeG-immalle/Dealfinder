@@ -16,7 +16,8 @@ const statusColors: Record<string, string> = {
 };
 
 export default function ScrapePage() {
-  const { data: jobs = [], isLoading } = useScrapeJobs();
+  const { data, isLoading } = useScrapeJobs();
+  const jobs = data?.data ?? [];
 
   return (
     <AppShell title="Scrape">

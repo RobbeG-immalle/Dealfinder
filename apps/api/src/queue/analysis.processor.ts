@@ -21,7 +21,10 @@ export class AnalysisProcessor extends WorkerHost {
     private readonly configService: ConfigService<AppConfig>,
   ) {
     super();
-    const apiKey = this.configService.get<string>('openai.apiKey') ?? '';
+    const apiKey = this.configService.get<string>('openai.apiKey');
+    if (!apiKey) {
+      throw new Error('OPENAI_API_KEY is not configured');
+    }
     this.imageAnalyzer = new ImageAnalyzer(apiKey);
     this.marketValueEstimator = new MarketValueEstimator(apiKey);
     this.profitCalculator = new ProfitCalculator();

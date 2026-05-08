@@ -162,9 +162,9 @@ export function DealsTable({ deals, isLoading }: DealsTableProps) {
     <div className="space-y-4">
       <Input
         placeholder="Filter by title..."
-        value={(table.getColumn('listing_title')?.getFilterValue() as string) ?? ''}
+        value={(table.getColumn('listing.title')?.getFilterValue() as string) ?? ''}
         onChange={(e) =>
-          table.getColumn('listing_title')?.setFilterValue(e.target.value)
+          table.getColumn('listing.title')?.setFilterValue(e.target.value)
         }
         className="max-w-sm"
       />

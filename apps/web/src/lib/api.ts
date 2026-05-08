@@ -81,7 +81,6 @@ export interface DealStats {
 export interface DealsFilter {
   marketplace?: string;
   minROI?: number;
-  minRoi?: number;
   maxPrice?: number;
   page?: number;
   limit?: number;
@@ -93,8 +92,7 @@ export const dealsApi = {
   getAll: async (filter?: DealsFilter): Promise<PaginatedResponse<Deal>> => {
     const params = new URLSearchParams();
     if (filter?.marketplace) params.set('marketplace', filter.marketplace);
-    const minROI = filter?.minROI ?? filter?.minRoi;
-    if (minROI !== undefined) params.set('minROI', String(minROI));
+    if (filter?.minROI !== undefined) params.set('minROI', String(filter.minROI));
     if (filter?.maxPrice !== undefined) params.set('maxPrice', String(filter.maxPrice));
     if (filter?.page) params.set('page', String(filter.page));
     if (filter?.offset !== undefined) params.set('offset', String(filter.offset));

@@ -1,5 +1,6 @@
 import { chromium } from 'playwright';
 import type { Browser, Page } from 'playwright';
+import { randomUUID } from 'crypto';
 import { Marketplace } from '@dealfinder/shared';
 import type { SearchParams, ScrapedListing } from '@dealfinder/shared';
 import { BaseScraper } from '../base/base-scraper';
@@ -101,7 +102,7 @@ export class EbayScraper extends BaseScraper {
           priceEl?.textContent?.replace(/[^\d.]/g, '') ?? '0';
 
         return {
-          id: Math.random().toString(36).slice(2),
+          id: randomUUID(),
           title: titleEl?.textContent?.replace('New Listing', '').trim() ?? '',
           description: '',
           images: (imageEl as HTMLImageElement)?.src ? [(imageEl as HTMLImageElement).src] : [],
@@ -136,7 +137,7 @@ export class EbayScraper extends BaseScraper {
         const rawPrice = priceEl?.textContent?.replace(/[^\d.]/g, '') ?? '0';
 
         return {
-          id: Math.random().toString(36).slice(2),
+          id: randomUUID(),
           title: titleEl?.textContent?.trim() ?? '',
           description: descriptionEl?.textContent?.trim() ?? '',
           images,
