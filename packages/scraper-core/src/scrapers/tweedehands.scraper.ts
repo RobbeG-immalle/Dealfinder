@@ -1,6 +1,5 @@
 import { chromium } from 'playwright';
 import type { Browser, Page } from 'playwright';
-import { randomUUID } from 'crypto';
 import { Marketplace } from '@dealfinder/shared';
 import type { SearchParams, ScrapedListing } from '@dealfinder/shared';
 import { BaseScraper } from '../base/base-scraper';
@@ -104,7 +103,7 @@ export class TweedehandsScraper extends BaseScraper {
         const rawPrice = priceEl?.textContent?.replace(/[^\d,]/g, '').replace(',', '.') ?? '0';
 
         return {
-          id: (el.getAttribute('data-item-id') ?? randomUUID()) as string,
+          id: (el.getAttribute('data-item-id') ?? crypto.randomUUID()) as string,
           title: titleEl?.textContent?.trim() ?? '',
           description: '',
           images: imageEl?.src ? [imageEl.src] : [],

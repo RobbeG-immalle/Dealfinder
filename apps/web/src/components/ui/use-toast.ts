@@ -9,6 +9,8 @@ export interface Toast {
   variant?: 'default' | 'destructive';
 }
 
+let toastCounter = 0;
+
 interface ToastState {
   toasts: Toast[];
 }
@@ -36,7 +38,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = React.useReducer(toastReducer, { toasts: [] });
 
   const toast = React.useCallback((t: Omit<Toast, 'id'>) => {
-    const id = Math.random().toString(36).slice(2);
+    const id = String(++toastCounter);
     dispatch({ type: 'ADD', toast: { ...t, id } });
     setTimeout(() => dispatch({ type: 'REMOVE', id }), 5000);
   }, []);
